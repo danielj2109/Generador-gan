@@ -1,0 +1,18 @@
+{
+  "dataset": "MNIST",
+  "categoria": 7,
+  "nombre_categoria": "siete",
+  "epocas": 30,
+  "imagenes_entrenamiento": 6265,
+  "parametros_G": 771968,
+  "parametros_D": 138625,
+  "final": {
+    "loss_D": 0.9771,
+    "loss_D_real": 0.5008,
+    "loss_D_falso": 0.4763,
+    "loss_G": 1.4586,
+    "D_x": 0.6662,
+    "D_G_z1": 0.3322,
+    "D_G_z2": 0.301
+  }
+}

@@ -1,0 +1,111 @@
+GAN — Categoría usada: MNIST, dígito 7 ('siete')
+Épocas: 30 | Lote: 64 | Ruido z: 100 | LR_G: 0.0002 | LR_D: 0.0002 | Adam betas: (0.5, 0.999)
+
+================================================================================
+RED NEURONAL GENERADORA (G)
+================================================================================
+Generador(
+  (proyeccion): Sequential(
+    (0): Linear(in_features=100, out_features=6272, bias=False)
+    (1): BatchNorm1d(6272, eps=1e-05, momentum=0.1, affine=True, bias=True, track_running_stats=True)
+    (2): ReLU(inplace=True)
+  )
+  (convoluciones): Sequential(
+    (0): ConvTranspose2d(128, 64, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, bias=True, track_running_stats=True)
+    (2): ReLU(inplace=True)
+    (3): ConvTranspose2d(64, 1, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
+    (4): Tanh()
+  )
+)
+
+Capa              Tipo              Forma de salida       Parámetros
+--------------------------------------------------------------------
+proyeccion.0      Linear            (6272,)                  627,200
+proyeccion.1      BatchNorm1d       (6272,)                   12,544
+proyeccion.2      ReLU              (6272,)                        0
+convoluciones.0   ConvTranspose2d   (64, 14, 14)             131,072
+convoluciones.1   BatchNorm2d       (64, 14, 14)                 128
+convoluciones.2   ReLU              (64, 14, 14)                   0
+convoluciones.3   ConvTranspose2d   (1, 28, 28)                1,024
+convoluciones.4   Tanh              (1, 28, 28)                    0
+--------------------------------------------------------------------
+TOTAL parámetros entrenables                                 771,968
+
+Valores de los pesos AL INICIO:
+Parámetro                     Cantidad      Media     Desv.       Mín       Máx
+-------------------------------------------------------------------------------
+proyeccion.0.weight            627,200    -0.0000    0.0200   -0.0920    0.0919
+proyeccion.1.weight              6,272     1.0002    0.0197    0.9137    1.0739
+proyeccion.1.bias                6,272     0.0000    0.0000    0.0000    0.0000
+convoluciones.0.weight         131,072     0.0000    0.0200   -0.0883    0.0921
+convoluciones.1.weight              64     0.9998    0.0178    0.9595    1.0379
+convoluciones.1.bias                64     0.0000    0.0000    0.0000    0.0000
+convoluciones.3.weight           1,024    -0.0006    0.0195   -0.0622    0.0619
+
+Valores de los pesos AL FINAL:
+Parámetro                     Cantidad      Media     Desv.       Mín       Máx
+-------------------------------------------------------------------------------
+proyeccion.0.weight            627,200     0.0002    0.0226   -0.1079    0.1069
+proyeccion.1.weight              6,272     0.9846    0.0952    0.7057    1.2701
+proyeccion.1.bias                6,272    -0.0025    0.1083   -0.3225    0.3119
+convoluciones.0.weight         131,072    -0.0018    0.0227   -0.1433    0.0960
+convoluciones.1.weight              64     1.1978    0.0614    1.0431    1.2971
+convoluciones.1.bias                64     0.1007    0.1054   -0.1130    0.2115
+convoluciones.3.weight           1,024    -0.0324    0.0637   -0.2003    0.1574
+
+================================================================================
+RED NEURONAL DISCRIMINADORA (D)
+================================================================================
+Discriminador(
+  (red): Sequential(
+    (0): Conv2d(1, 64, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
+    (1): LeakyReLU(negative_slope=0.2, inplace=True)
+    (2): Conv2d(64, 128, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
+    (3): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, bias=True, track_running_stats=True)
+    (4): LeakyReLU(negative_slope=0.2, inplace=True)
+    (5): Flatten(start_dim=1, end_dim=-1)
+    (6): Linear(in_features=6272, out_features=1, bias=True)
+    (7): Sigmoid()
+  )
+)
+
+Capa              Tipo              Forma de salida       Parámetros
+--------------------------------------------------------------------
+red.0             Conv2d            (64, 14, 14)               1,024
+red.1             LeakyReLU         (64, 14, 14)                   0
+red.2             Conv2d            (128, 7, 7)              131,072
+red.3             BatchNorm2d       (128, 7, 7)                  256
+red.4             LeakyReLU         (128, 7, 7)                    0
+red.5             Flatten           (6272,)                        0
+red.6             Linear            (1,)                       6,273
+red.7             Sigmoid           (1,)                           0
+--------------------------------------------------------------------
+TOTAL parámetros entrenables                                 138,625
+
+Valores de los pesos AL INICIO:
+Parámetro                     Cantidad      Media     Desv.       Mín       Máx
+-------------------------------------------------------------------------------
+red.0.weight                     1,024    -0.0004    0.0198   -0.0710    0.0606
+red.2.weight                   131,072     0.0000    0.0200   -0.0897    0.0873
+red.3.weight                       128     1.0014    0.0207    0.9390    1.0530
+red.3.bias                         128     0.0000    0.0000    0.0000    0.0000
+red.6.weight                     6,272     0.0002    0.0200   -0.0742    0.0761
+red.6.bias                           1     0.0000    0.0000    0.0000    0.0000
+
+Valores de los pesos AL FINAL:
+Parámetro                     Cantidad      Media     Desv.       Mín       Máx
+-------------------------------------------------------------------------------
+red.0.weight                     1,024     0.0003    0.0228   -0.0836    0.0694
+red.2.weight                   131,072    -0.0000    0.0233   -0.1304    0.1099
+red.3.weight                       128     1.0332    0.0261    0.9676    1.1036
+red.3.bias                         128     0.0063    0.0168   -0.0549    0.0605
+red.6.weight                     6,272    -0.0045    0.0312   -0.1541    0.1244
+red.6.bias                           1    -0.0079    0.0000   -0.0079   -0.0079
+
+================================================================================
+VEREDICTO DEL DISCRIMINADOR AL FINAL (10 ejemplos)
+================================================================================
+D(x) reales   : 0.294, 0.434, 0.195, 0.355, 0.240, 0.107, 0.225, 0.720, 0.694, 0.574
+D(G(z)) falsas: 0.012, 0.118, 0.116, 0.117, 0.106, 0.406, 0.350, 0.107, 0.176, 0.362
+Media sobre 64 imágenes -> D(x) reales: 0.454 | D(G(z)) generadas: 0.188

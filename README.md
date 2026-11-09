@@ -226,3 +226,98 @@ El registro completo de la consola del entrenamiento queda en `entrenamiento_log
 - Cambiar la categoría: `python entrenar.py --categoria 3`
 - Más épocas para acercarse al equilibrio: `python entrenar.py --epocas 60`
 - Cambiar `DIM_LATENTE`, `FILTROS_G`, `FILTROS_D` o las tasas de aprendizaje en `config.py` y comparar las gráficas.
+
+## 11. Requisitos del sistema
+
+Para ejecutar el proyecto se necesita un entorno de Python con las siguientes bibliotecas:
+
+- **PyTorch (`torch`):** construcción y entrenamiento de las redes neuronales.
+- **Torchvision (`torchvision`):** acceso al conjunto de datos MNIST.
+- **Matplotlib (`matplotlib`):** generación de gráficas y visualizaciones.
+- **NumPy (`numpy`):** operaciones numéricas.
+
+Las dependencias se encuentran definidas en `requirements.txt`. Se recomienda utilizar un entorno virtual para mantener aisladas las bibliotecas del proyecto.
+
+### Preparación del entorno
+
+```bash
+python -m venv .venv
+```
+
+En Windows:
+
+```bash
+.venv\Scripts\activate
+```
+
+En Linux o macOS:
+
+```bash
+source .venv/bin/activate
+```
+
+Instala las dependencias:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+Para comprobar la instalación de PyTorch:
+
+```bash
+python -c "import torch; print(torch.__version__)"
+```
+
+## 12. Problemas frecuentes
+
+### Error al descargar MNIST
+
+El conjunto de datos puede requerir conexión a Internet durante la primera ejecución. Comprueba tu conexión y vuelve a ejecutar el entrenamiento.
+
+### Error al instalar PyTorch
+
+Verifica la versión de Python y consulta las instrucciones oficiales de instalación de PyTorch para seleccionar una versión compatible con tu sistema operativo y hardware.
+
+### No se encuentra el modelo entrenado
+
+Ejecuta primero el entrenamiento y comprueba que los archivos del generador se hayan guardado en la carpeta `resultados/` antes de ejecutar `generar.py`.
+
+### Las imágenes generadas no parecen dígitos reconocibles
+
+La calidad depende del entrenamiento y de los hiperparámetros. Prueba diferentes cantidades de épocas y compara las gráficas antes de concluir que el modelo ha mejorado.
+
+## 13. Conceptos importantes en las GAN
+
+- **Espacio latente:** espacio de vectores aleatorios que el generador transforma en imágenes.
+- **Época:** recorrido completo por los datos de entrenamiento utilizados por el modelo.
+- **Función de pérdida:** medida que permite evaluar el desempeño de cada red durante el entrenamiento.
+- **Colapso de modos (*mode collapse*):** problema en el que el generador produce imágenes muy similares y pierde diversidad.
+- **Equilibrio adversarial:** situación en la que el generador y el discriminador mejoran mediante sus objetivos contrapuestos.
+
+## 14. Experimentos futuros
+
+Las siguientes propuestas permiten ampliar el proyecto sin cambiar su funcionamiento actual:
+
+1. Comparar los resultados de diferentes categorías del conjunto de datos MNIST.
+2. Evaluar el efecto de aumentar o reducir las épocas de entrenamiento.
+3. Comparar distintas dimensiones del vector latente.
+4. Analizar cómo las tasas de aprendizaje afectan la estabilidad del entrenamiento.
+5. Estudiar la diversidad de las imágenes generadas.
+6. Comparar las pérdidas del generador y del discriminador en diferentes experimentos.
+
+Para obtener conclusiones útiles, conviene modificar un parámetro a la vez y conservar los resultados de cada experimento.
+
+## 15. Recursos de aprendizaje
+
+- [Documentación oficial de PyTorch](https://pytorch.org/docs/stable/index.html)
+- [Tutoriales oficiales de PyTorch](https://pytorch.org/tutorials/)
+- [Documentación de Torchvision](https://pytorch.org/vision/stable/index.html)
+- [Artículo original de las GAN](https://arxiv.org/abs/1406.2661)
+
+Estos recursos permiten profundizar en las redes neuronales, el procesamiento de imágenes y los fundamentos matemáticos de las redes generativas antagónicas.
+
+## 16. Propósito educativo
+
+Este proyecto busca facilitar la comprensión del aprendizaje generativo mediante un ejemplo práctico con MNIST. Su estructura permite explorar el funcionamiento del generador y del discriminador, analizar las métricas de entrenamiento y experimentar con diferentes hiperparámetros.
+
+Los resultados pueden variar según la configuración, el entorno de ejecución y los parámetros utilizados.
